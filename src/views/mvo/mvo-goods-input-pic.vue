@@ -238,7 +238,7 @@ export default {
         })
       } else {
         this.$store.dispatch('UpdateRecord',this.ProductData).then((result) => {
-          if(result.data){
+          if(result.code===200){
             this.fetchData()
           }else{
             this.$message({
@@ -257,7 +257,7 @@ export default {
       })
         .then(() => {
           this.$store.dispatch('DeleteRecord',row.PRC_ID).then((result) => {
-            if(result.data){
+            if(result.code===200){
               console.log("result:"+result.data.data);
               this.$message({
                 type: 'info',
@@ -279,7 +279,7 @@ export default {
       //改变状态，传给后端商品ID和商品当前状态，后端进行判断，并在数据库进行相应的更新
       const para = {'PRC_ID':row.PRC_ID,'state':row.state}
       this.$store.dispatch('ChangeState',para).then((result) => {
-        if(result.data){
+        if(result.code===200){
           console.log("result:"+result.data.data);
           this.$message({
             type: 'info',
@@ -317,7 +317,7 @@ export default {
     search() {
       this.listLoading = true
       this.$store.dispatch('SearchRecord',this.sCondition).then((result) => {
-        if(result.data){
+        if(result.code===200){
           this.list = result.data
         }else{
           this.$message({
